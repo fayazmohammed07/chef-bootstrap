@@ -2,13 +2,16 @@
 
 echo "please enter file name"
 read file
-#echo "please enter file name for node name "
-#read file1
 
 cd /opt/chef-repo
-while read p
+
+while IFS=' ' read -r f1 f2
 do
-           echo "$p"
+    echo "$f1" "$f2"
            cd /opt/chef-repo
-           knife bootstrap $p -U root -P 12345678 --sudo -N "node" -y
-done < file.txt
+           echo "field # 1 : $f1 ==> field #2 : $f2"
+           knife bootstrap $f1 -U root -P 12345678 --sudo -N "$f2" --sk
+
+
+done < $file
+
